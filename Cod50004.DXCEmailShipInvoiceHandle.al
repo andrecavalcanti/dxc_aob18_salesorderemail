@@ -11,5 +11,12 @@ codeunit 50004 "DXC Email Ship. Invoice Handle"
         if (SalesHeader."DXC Release Date" = 0D) then
           SalesHeader."DXC Release Date" := TODAY;
     end;
+
+    [EventSubscriber(ObjectType::Table, 77, 'OnBeforeSendEmailDirectly', '', false, false)]
+    local procedure HandleBeforeSendEmailDirectlyOnReportSelections(var PShowDialog : Boolean;PReportSelections : Record "Report Selections");
+    begin
+
+        PShowDialog := PReportSelections."Use for Email Body";
+    end;
 }
 
