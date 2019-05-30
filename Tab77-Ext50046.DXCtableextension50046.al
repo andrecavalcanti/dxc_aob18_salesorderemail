@@ -1,4 +1,4 @@
-tableextension 50046 "DXCtableextension50046" extends "Report Selections" //9657
+tableextension 50046 "DXCtableextension50046" extends "Report Selections" //77
 {  
 
     fields
