@@ -1,10 +1,10 @@
-pageextension 50068 "pageextension50102" extends "Sales Order Invoice" //10028
+pageextension 50068 "DXCpageextension50068" extends "Sales Order Invoice" //10028
 {    
     actions
     {
         addafter("Post and &Print")
         {
-            action(DXCPostAndSend)
+            action("DXCPostAndSend")
             {
                 ApplicationArea = Basic,Suite;
                 CaptionML = ENU='Post and Send',

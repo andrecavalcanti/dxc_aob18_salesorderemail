@@ -1,14 +1,14 @@
-pageextension 50058 "pageextension50103" extends "Customer Report Selections" //9657
+pageextension 50058 "DXCpageextension50058" extends "Customer Report Selections" //9657
 {    
     layout
     {
         addafter("Email Body Layout Description")
         {
-            field("DXC Ship-to Code";"DXC Ship-to Code")
+            field("DXC Ship-to Code"; "DXC Ship-to Code")
             {
               ApplicationArea = All;
             }
-            field("DXC Hide Mail Dialog";"DXC Hide Mail Dialog")
+            field("DXC Hide Mail Dialog"; "DXC Hide Mail Dialog")
             {
               ApplicationArea = All;
             }
