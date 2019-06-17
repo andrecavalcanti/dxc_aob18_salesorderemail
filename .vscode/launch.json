@@ -6,9 +6,10 @@
             "request": "launch",            
             "name": "Your own server",
             // ---- Docker---
-            "server": "http://172.28.7.178", 
+            "server": "http://172.19.191.232", 
             "serverInstance": "NAV",                   
             "port"  : 7049,   
+            "authentication":"UserPassword",
             // --- DEV ---         
             // "server": "http://172.19.2.41",                    
             // "serverInstance": "TPM-DEV",
@@ -18,7 +19,7 @@
             //  "serverInstance": "DynamicsNAV110",         
             //  "port"  : 7049,
             // "authentication": "Windows",
-            "authentication":"UserPassword",
+            // "authentication":"UserPassword",
             //"tenant": "default",
             //"startupObjectId": 22,
            //"schemaUpdateMode": "Synchronize"
