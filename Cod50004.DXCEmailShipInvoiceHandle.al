@@ -20,7 +20,7 @@ codeunit 50004 "DXC Email Ship. Invoice Handle"
     end;
 
     [EventSubscriber(ObjectType::Table, 77, 'OnBeforeSendEmailToCustDirectly', '', false, false)]
-    local procedure "DXCHandleBeforeSendEmailToCustDirectlyOnReport Selections"(var Sender : Record "Report Selections";RecordVariant : Variant;var ShipToCode : Code[10] );
+    local procedure "DXCHandleBeforeSendEmailToCustDirectlyOnReport Selections"(var Sender : Record "Report Selections";RecordVariant : Variant;var TempShipToAddress : Record "Ship-to Address" temporary);
     var
         RecRef : RecordRef;
         DataTypeMngt : Codeunit "Data Type Management";
@@ -33,19 +33,26 @@ codeunit 50004 "DXC Email Ship. Invoice Handle"
             begin
               RecRef.SETTABLE(SalesHeader);
               //if (SalesHeader."Ship-to Code" <> '') then
-              ShipToCode := SalesHeader."Ship-to Code";
-              
+              TempShipToAddress.Init;
+              TempShipToAddress."Customer No." := SalesHeader."Sell-to Customer No.";
+              TempShipToAddress.Code := SalesHeader."Ship-to Code";
+              TempShipToAddress.insert;
+              //ShipToCode := SalesHeader."Ship-to Code";              
             end;
         end;
         // << AOB-18
     end;
 
     [EventSubscriber(ObjectType::Table, 77, 'OnBeforeCopyToReportSelection', '', false, false)]
-    local procedure "DXCHandleOnBeforeCopyToReportSelectionOnReportSelections"(var Sender : Record "Report Selections";var CustomReportSelection : Record "Custom Report Selection";ShipToCode : Code[10] );
+    local procedure "DXCHandleOnBeforeCopyToReportSelectionOnReportSelections"(var Sender : Record "Report Selections";var CustomReportSelection : Record "Custom Report Selection";var TempShipToAddress : Record  "Ship-to Address" temporary);
            
     begin
         // >> AOB-18
-        CustomReportSelection.SetRange("DXC Ship-to Code",ShipToCode);
+        if TempShipToAddress.FindFirst then
+            CustomReportSelection.SetRange("DXC Ship-to Code",TempShipToAddress.Code)
+        else
+            CustomReportSelection.SetRange("DXC Ship-to Code",'')
+        
         // << AOB-18
     end;
 }
